@@ -19,7 +19,7 @@
         <ul class="main-menu" id="main-menu">
             <li><a href="index.php">Domov</a></li>
             <li><a href="portfolio.html">Portfólio</a></li>
-            <li><a href="qna.html">Q&A</a></li>
+            <li><a href="qna.php">Q&A</a></li>
             <li><a href="kontakt.html">Kontakt</a></li>
         </ul>
         <a class="hamburger" id="hamburger">
@@ -67,7 +67,7 @@
           } elseif ($hour < 22) {
             echo "<h3>Dobrý večer</h3>";
           } else {
-            echo "<h3>Dobru noc</h3>"
+            echo "<h3>Dobru noc</h3>";
           }
           ?>
               <p><strong><em>Elit culpa id mollit irure sit. Ex ut et ea esse culpa officia ea incididunt elit velit veniam qui. Mollit deserunt culpa incididunt laborum commodo in culpa.</em></strong></p>
