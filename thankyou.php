@@ -5,7 +5,6 @@ $file_path = "parts/header.php";
 if(!require($file_path)) {
     echo"Failed to include $file_path";}
 ?>
-<body>
 <?php
 include_once "parts/nav.php";
 ?>

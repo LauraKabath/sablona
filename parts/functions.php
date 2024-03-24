@@ -39,8 +39,7 @@
     echo '<section class="container">';
     for ($i = 0; $i < count($otazky); $i++) {
         echo '<div class="accordion">
-                    <div class="question">' .
-            $otazky[$i] . '
+                    <div class="question"><strong>' .$otazky[$i]. '</strong>
                      </div>
                     <div class="answer">' .
             $odpovede[$i] . '
@@ -114,7 +113,7 @@ function finishPortfolio(){
   foreach ($portfolio as $col) {
     echo '<div class="row">';
     foreach ($col as $index) {
-      echo '<div class="col-25 portfolio text-white text-center" id="portfolio-'. $index.'">
+      echo '<div class="col-25 portfolio text-white text-center" id="portfolio-'.$index.'">
                       Web stránka '.$index.'
                   </div>';
   }
@@ -144,7 +143,7 @@ function finishPortfolio2()
         echo '<div class="row">';
         foreach ($col as $index) {
             $text = $portfolioTexts["portfolio$index.jpg"]; // Získanie textu z JSON súboru
-            echo '<div class="col-25 portfolio text-white text-center" id="portfolio-' . $index . '">
+            echo '<div class="col-25 portfolio text-white text-center" id="portfolio-'. $index .'">
                             ' . $text . '
                          </div>';
         }
@@ -153,20 +152,17 @@ function finishPortfolio2()
 }
 
 // po kliknuti na okienko sa dostaneme na URL, ktora je ulozena v jsone
-function finishPortfolio3()
-{
+function finishPortfolio3() {
     $portfolioData = preparePortfolio();
     $data = json_decode(file_get_contents("data/datas.json"), true);
-
-    echo '<div id="portfolio-row">';
-    foreach ($portfolioData as $col) {
+    foreach ($portfolioData as $row => $col) {
         echo '<div class="row">';
         foreach ($col as $index) {
-            $text = $data["portfolio-text-url"]["portfolio$index.jpg"]["text"];
-            $link = $data["portfolio-text-url"]["portfolio$index.jpg"]["link"];
-//<<<HTML je tzv. "here-doc" syntax, ktorá umožňuje vložiť viacriadkový text do premennej.
+            $text = $data["portfolio-text-url"]["portfolio{$index}.jpg"]["text"]; // Získanie textu z JSON súboru
+            $link = $data["portfolio-text-url"]["portfolio{$index}.jpg"]["link"];
+            //<<<HTML je tzv. "here-doc" syntax, ktorá umožňuje vložiť viacriadkový text do premennej.
             echo <<<HTML
-                    <a id="portfolio-$index" class="col-25 portfolio" href="$link">
+                    <a id="portfolio-{$index}" class="col-25 portfolio" href="{$link}">
                     <div class="text-center">
                     $text
                     </div>
@@ -175,5 +171,4 @@ function finishPortfolio3()
         }
         echo '</div>';
     }
-    echo '</div>';
 }
