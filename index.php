@@ -5,10 +5,7 @@
   if(!require($file_path)) {
     echo"Failed to include $file_path";}
 ?>
-<body>
-<?php 
-        include_once "parts/nav.php";
-        ?>
+<?php include_once "parts/nav.php"; ?>
     <main>
       <section class="slides-container">
         <?php
@@ -17,13 +14,7 @@
         ?>
         
       </section>
-      <section class="container">
-        <div class="row">
-          <div class="col-100 text-center">
-          <?php pridajPozdrav(); ?>
-              <p><strong><em>Elit culpa id mollit irure sit. Ex ut et ea esse culpa officia ea incididunt elit velit veniam qui. Mollit deserunt culpa incididunt laborum commodo in culpa.</em></strong></p>
-          </div>
-        </div>
+      <?php include_once "sectiondarktheme.php" ?> <!-- zahrnie subor sectiondarktheme.php odkial zoberie podmienku pre light/dark theme a tiez prida novu sekciu s pozdravom -->
       </section>
       <section class="container">
         <div class="row">

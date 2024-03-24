@@ -3,7 +3,6 @@
     <?php
     include_once "parts/header.php";
     ?>
-    <body>
         <?php 
         include_once "parts/nav.php";
         ?>
@@ -13,7 +12,7 @@
                     <h1>Portfólio</h1>
                 </div>
             </section>
-              <section class="container">
+            <?php include_once "sectiondarktheme.php" ?>
                 <?php 
                 finishPortfolio3();
                 ?>
