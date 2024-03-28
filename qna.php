@@ -20,6 +20,7 @@ include_once "parts/nav.php";
 
     $qna = new QNA();
     $qna->insertQnA();
+    $qna->nacitajdatabazu(); //volanie funkcie nacitajdatabazu()
   ?>
 </main>
 <?php
