@@ -15,8 +15,12 @@ include_once "parts/nav.php";
     <?php include_once "sectiondarktheme.php" ?>
   </section>
   <?php
-    include_once "parts/functions.php";
-    insertQnA(); ?>
+    include_once "classes/QNA.php";
+    use otazkaodpovede\QNA;
+
+    $qna = new QNA();
+    $qna->insertQnA();
+  ?>
 </main>
 <?php
 include_once "parts/footer.php";
