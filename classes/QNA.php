@@ -41,11 +41,21 @@ class QNA {
 
             $sql = "INSERT INTO qna (otazka, odpoved) VALUES (:otazka, :odpoved)";
             $statement = $this->conn->prepare($sql);
-
+            /*BONUS*/
             for ($i = 0; $i < count($otazky); $i++) {
-                $statement->bindParam(':otazka', $otazky[$i]);
-                $statement->bindParam(':odpoved', $odpovede[$i]);
-                $statement->execute();
+                $query = "SELECT COUNT(*) FROM qna WHERE otazka = :otazka AND odpoved = :odpoved "; //sql dotaz, ktory spocita kombinacie otazka, odpoved
+                $check = $this->conn->prepare($query); //pripravi dotaz
+                $check->bindParam(':otazka', $otazky[$i]); //spoji placeholder :otazka s hodnotou premennej $otazky[$i]
+                $check->bindParam(':odpoved', $odpovede[$i]); //spoji placeholder :odpoved s hodnotou premennej $odpovede[$i]
+                $check->execute(); //spusti prikaz
+                $pocet = $check->fetchColumn(); //spocita pocet vysledkov (stlpcov)
+
+                if ($pocet == 0) { //ak je pocet nulovy, dana kombinacia otazka-odpoved sa v databaze nenachadza, pridame ju do databazy
+                    $statement->bindParam(':otazka', $otazky[$i]);
+                    $statement->bindParam(':odpoved', $odpovede[$i]);
+                    $statement->execute();
+                }
+            /*BONUS*/
             }
             $this->conn->commit();
             echo "Data boli vlozene";
@@ -58,8 +68,8 @@ class QNA {
 
     public function nacitajdatabazu() {
         try {
-            $query = "SELECT DISTINCT otazka, odpoved FROM qna"; //sql dotaz, ktory vyberie unikatnu kombinaciu otazka-odpoved z tabulky qna
-            $statement = $this->conn->prepare($query); //pripravy dotaz
+            $query = "SELECT otazka, odpoved FROM qna"; //sql dotaz, ktory vyberie kombinaciu otazka-odpoved z tabulky qna
+            $statement = $this->conn->prepare($query); //pripravi dotaz
             $statement->execute(); //spusti pripraveny dotaz
 
             $result = $statement->fetchAll(); //zachytenie dat z databazy
