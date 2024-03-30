@@ -29,8 +29,7 @@ class Kontakt{
     }
 
     public function ulozitSpravu($meno, $email, $sprava){
-        $sql = "INSERT INTO kontakt formular
-    (meno, email, sprava)
+        $sql = "INSERT INTO kontakt formular(meno, email, sprava)
     VALUES ('".$meno."',''".$email."','".$sprava."')";
         $statement = $this->conn->prepare($sql);
 
