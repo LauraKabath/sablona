@@ -55,7 +55,7 @@ class QNA {
                     $statement->bindParam(':odpoved', $odpovede[$i]);
                     $statement->execute();
                 }
-            /*BONUS*/
+                /*BONUS*/
             }
             $this->conn->commit();
             echo "Data boli vlozene";
