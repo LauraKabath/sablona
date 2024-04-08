@@ -1,37 +1,25 @@
 <?php
 
 namespace formular;
-require_once('../db/config.php');
+error_reporting(E_ALL); //zapnutie chybovych hlaseni
+ini_set("display_errors", "On");
+require_once(__ROOT__.'/classes/Database.php');
 
 use mysql_xdevapi\Exception;
-use PDO;
-class Kontakt{
-    private $conn;
+
+class Kontakt extends \Database {
+     protected $connection;
 
     public function __construct(){
         $this->connect();
-    }
-    private function connect(){
-        $config = DATABASE;
-
-        $options = array(
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        );
-
-        try {
-            $this->conn = new PDO('mysql:host='.$config['HOST'].
-            ';dbname='.$config['DBNAME'].';port='.$config['PORT'],
-            $config['USER_NAME'], $config['PASSWORD'], $options);
-        } catch (\PDOException $e){
-            die("Chyba pripojenia: ".$e->getMessage());
-        }
+        // Pouzitie gettera na ziskanie spojenia
+        $this->connection = $this->getConnection();
     }
 
     public function ulozitSpravu($meno, $email, $sprava){
-        $sql = "INSERT INTO kontakt formular(meno, email, sprava)
+        $sql = "INSERT INTO udaje(meno, email, sprava)
     VALUES ('".$meno."',''".$email."','".$sprava."')";
-        $statement = $this->conn->prepare($sql);
+        $statement = $this->connection->prepare($sql);
 
         try {
             $insert = $statement->execute();
